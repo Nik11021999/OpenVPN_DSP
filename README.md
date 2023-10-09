@@ -12,11 +12,11 @@ As proof of what is written above, we can attach to the OpenVPN client/server sh
 
 which will show the routing table of the machine. If everything is ok, we should be able to see this line "default via 192.168.1.2 dev eth0" on client-side :
 
-
+![client_shell_ip_route_output](URL)
 
 while on server-side :
 
- 
+![server_shell_ip_route_output](./shell_screenshots/ip_route.png) 
 
 and :
 <pre>
