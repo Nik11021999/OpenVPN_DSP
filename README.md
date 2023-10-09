@@ -12,11 +12,11 @@ As proof of what is written above, we can attach to the OpenVPN client/server sh
 
 which will show the routing table of the machine. If everything is ok, we should be able to see this line "default via 192.168.1.2 dev eth0" on client-side :
 
-
+![client_shell_ip_route_output](Shell_screenshots/ip_route_client.png)
 
 while on server-side :
 
- 
+![server_shell_ip_route_output](Shell_screenshots/ip_route_server.png) 
 
 and :
 <pre>
@@ -107,11 +107,13 @@ $ openvpn --config /vpn/CLIENTNAME.ovpn --auth-nocache
 
 If everything goes fine we'll see this kind of output on client-side :
 
+![client_shell_vpn_ok_output](Shell_screenshots/client_shell_vpn_ok.png) 
+
 By reading this output we can understand that the subnet used to address the nodes inside the vpn is 192.168.255.0/24 (openvpn server default choice) and that the openvpn client got the address 192.168.255.6. Obviously, the private IP address of your vpn client most likely will be different from the one you'll see in this image.
 
 Instead, on server-side we'll get this kind of output:
 
- 
+![server_shell_vpn_ok_output](Shell_screenshots/server_shell_vpn_ok.png) 
 
 Now we can prove that the vpn connection has been created simply by executing this command
 
@@ -127,8 +129,11 @@ Indeed, if we try to ping the usual google DNS server (8.8.8.8) we'll notice tha
 
 As expected, both server and client will have their routing tables updated since they created/connected to a vpn, in particular on server-side :
 
+![server_shell_ip_route_vpn_output](Shell_screenshots/ip_route_vpn_server.png) 
+
 while on client-side :
 
+![client_shell_ip_route_vpn_output](Shell_screenshots/ip_route_vpn_client.png) 
  
 ## Capture the packet sent during the vpn client connection
 
