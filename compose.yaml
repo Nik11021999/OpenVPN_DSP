@@ -1,0 +1,54 @@
+version: '2'
+services:
+ openVpn-Server:
+  image: 'ndambra99/myopenvpnserver'
+  stdin_open: true
+  container_name: openVpn-Server
+  tty: true
+  volumes:
+   - ./server/ovpn-data:/etc/openvpn
+  networks:
+   server_network:
+    ipv4_address: 192.168.2.3
+  cap_add: 
+   - NET_ADMIN	
+
+ router:
+  image: 'ndambra99/alpine_router'
+  container_name: router
+  stdin_open: true
+  tty: true
+  volumes:
+   - ./router_captures/:/captures/
+  networks:
+   server_network:
+    ipv4_address: 192.168.2.2
+   client_network:
+    ipv4_address: 192.168.1.2
+  cap_add: 
+   - ALL
+
+ openVpn-Client:
+  image: 'ndambra99/myopenvpnclient'
+  container_name: openVpn-Client
+  stdin_open: true
+  devices:
+   - "/dev/net/tun:/dev/net/tun"
+  volumes:
+   - ./client/vpn_config/:/vpn
+  tty: true
+  networks:
+   client_network:
+    ipv4_address: 192.168.1.3
+  cap_add:
+   - NET_ADMIN 
+
+networks:
+ server_network:
+  ipam:
+   config:
+    - subnet: 192.168.2.1/24
+ client_network:
+  ipam:
+   config:
+    - subnet: 192.168.1.1/24
