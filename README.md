@@ -6,7 +6,11 @@ Before proceeding with the set up of the vpn server it's worth saying that the d
 
 As proof of what is written above, we can attach to the OpenVPN client/server shell and execute the two commands that follow :
 
-$ ip route 
+<pre> 
+'''bash
+    $ ip route 
+'''
+</pre>
 
 which will show the routing table of the machine. If everything is ok, we should be able to see this line "default via 192.168.1.2 dev eth0" on client-side :
 
