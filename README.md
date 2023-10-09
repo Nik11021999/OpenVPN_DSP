@@ -141,6 +141,8 @@ If you want to capture the packets sent/received from the server/client during t
 
 <pre>
 $ tcpdump -i eth0 -w capture_eth0.pcap 
+#After stopping the capture (ctrl+C), copy the file in the "captures" folder 
+$ cp capture_eth0 /captures
 </pre>
 
 Obviously, you'll not be able to decrypt most of the packets captured because the two entities (client and server) will encrypt them as soon as the chipher spec will be exchanged.
