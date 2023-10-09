@@ -1,4 +1,4 @@
-Working environment
+##Working environment
 
 This lab consists in two networks, one for the OpenVPN client and the other one for the OpenVPN server. These two networks are linked between each other through a router.
 
@@ -21,12 +21,13 @@ $ ping 8.8.8.8
 which will show no result if executed on the client, making us understand that is not possible for the OpenVPN client to reach the public internet .
 
  
-Server Setup
+##Server Setup
 
 First of all we need to set up the OpenVPN server and in order to do so there are several scripts shipped with the given image.
 
 Once attached to the OpenVPN Server shell, the steps we need to follow are :
-Generate the openvpn configuration files
+
+###Generate the openvpn configuration files
 
 $ ovpn_genconfig -u udp://192.168.2.3
 
@@ -39,7 +40,8 @@ This script generates both "openvpn.conf" and "ovpn_env.sh" configuration files 
     etc.
 
 you can also edit the "openvpn.conf" manually.
-Build a Certificate Authority and generate certificate and keys for the server
+
+###Build a Certificate Authority and generate certificate and keys for the server
 
 $ ovpn_initpki
 
@@ -52,14 +54,15 @@ This script :
     generates a Certificate Revocation List file.
 
 During the execution of this script you will be asked to insert a common name and a passphrase for the CA .
-Generate client certificate without a passphrase
+
+###Generate client certificate without a passphrase
 
 # Start the openvpn server process
 $ ovpn_run --daemon
 # Generate certificate
 $ easyrsa build-client-full CLIENTNAME nopass
 
-Generate client ovpn configuration file
+###Generate client ovpn configuration file
 
 $ ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
 $ cp CLIENTNAME.ovpn etc/openvpn
@@ -72,7 +75,8 @@ $ ps aux | grep ovpn_run
 $ kill <ovpn_run_PID>
 
 This procedure is not mandatory for the correct functioning of the lab, however it's useful because the next time we'll execute the openvpn server process we'll do it without the daemon option so that we'll be able to see its output, in particular the output generated as consequence of the client connection.
-Client connection
+
+##Client connection
 
 Once the client ovpn configuration file is copied in the correct folder, we'll start again the openvpn server process without using the daemon option so that we can see its log on the shell:
 
@@ -105,7 +109,7 @@ As expected, both server and client will have their routing tables updated since
 while on client-side :
 
  
-Capture the packet sent during the vpn client connection
+##Capture the packet sent during the vpn client connection
 
 If you want to capture the packets sent/received from the server/client during the client vpn connection you can execute the following command on the router shell :
 
